@@ -14,9 +14,11 @@ WORKDIR /src/vane
 COPY patches /tmp/patches
 RUN for p in /tmp/patches/*.patch; do [ -e "$p" ] && patch -p1 < "$p"; done
 
-RUN yarn install --frozen-lockfile --network-timeout 600000
-RUN mkdir -p /src/vane/data
-RUN yarn build
+RUN mkdir -p /src/vane/data \
+    && yarn install --frozen-lockfile --network-timeout 600000 \
+    && yarn build \
+    && yarn cache clean --all \
+    && rm -rf node_modules .next/cache /root/.cache /tmp/*
 
 FROM node:24.5.0-slim
 
