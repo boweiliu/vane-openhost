@@ -78,6 +78,33 @@ We'd also like to thank the following partners for their generous support:
 
 There are mainly 2 ways of installing Vane - With Docker, Without Docker. Using Docker is highly recommended.
 
+### OpenHost deployment
+
+This fork includes an `openhost.toml` manifest and startup glue for running Vane on OpenHost.
+
+Deploy from the main branch with service permissions granted so the app can read its OpenRouter key from the OpenHost secrets service:
+
+```bash
+oh app deploy https://github.com/boweiliu/vane-openhost@main --name vane --grant-permissions-v2 --wait
+```
+
+For a second fresh test instance:
+
+```bash
+oh app deploy https://github.com/boweiliu/vane-openhost@main --name vane2 --grant-permissions-v2 --wait
+```
+
+Before deploying, store an `OPENROUTER_API_KEY` value in the OpenHost secrets service. At startup, `openhost/seed-config.mjs` renders `openhost/config.template.json` into persistent app data and injects that secret. The key is not committed to this repo.
+
+OpenHost-specific notes:
+
+- The app listens on port `3000`, matching `[runtime.container].port` in `openhost.toml`.
+- Persistent Vane data and uploads are stored under `OPENHOST_APP_DATA_DIR`.
+- `/api/health` is used as the OpenHost health check.
+- The bundled SearXNG service runs inside the same container on `localhost:8080`.
+- This app needs the manifest-declared secrets-service grant; without `--grant-permissions-v2`, startup will not be able to seed the OpenRouter provider.
+
+
 ### Getting Started with Docker (Recommended)
 
 Vane can be easily run using Docker. Simply run the following command:
