@@ -36,4 +36,6 @@ fi
 cd /home/vane
 echo "Starting Vane..."
 
+export HOSTNAME=0.0.0.0
+export PORT=3000
 exec node server.js
