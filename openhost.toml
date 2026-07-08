@@ -9,7 +9,7 @@ image = "Dockerfile"
 port = 3000
 
 [routing]
-health_check = "/"
+health_check = "/api/health"
 
 [resources]
 memory_mb = 4096
