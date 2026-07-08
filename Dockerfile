@@ -4,7 +4,7 @@ ARG VANE_REPO=https://github.com/ItzCrazyKns/Vane.git
 ARG VANE_REF=master
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates git python3 python3-pip sqlite3 patch \
+    ca-certificates git python3 python3-pip sqlite3 patch build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /src
