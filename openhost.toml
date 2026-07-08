@@ -12,8 +12,8 @@ port = 3000
 health_check = "/"
 
 [resources]
-memory_mb = 1536
-cpu_cores = 1.0
+memory_mb = 4096
+cpu_cores = 2.0
 
 [data]
 app_data = true
