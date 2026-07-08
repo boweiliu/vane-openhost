@@ -1,0 +1,7 @@
+**/node_modules
+.git
+.next
+data/*
+!data/.gitignore
+.env
+.env.*
