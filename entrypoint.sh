@@ -11,7 +11,6 @@ rm -rf "$APP_DIR/data" "$APP_DIR/uploads"
 ln -s "$VANE_DATA_DIR" "$APP_DIR/data"
 ln -s "$VANE_UPLOADS_DIR" "$APP_DIR/uploads"
 
-export DATA_DIR="$APP_DATA_DIR"
 export SEARXNG_API_URL="${SEARXNG_API_URL:-https://searxng.oh.bowei.in/}"
 export HOSTNAME=127.0.0.1
 export PORT="${VANE_PORT:-3000}"

@@ -4,7 +4,7 @@ import path from 'node:path';
 const appRoot = process.env.APP_DIR || '/opt/vane';
 const template = '/app/openhost/config.template.json';
 const dataRoot = process.env.OPENHOST_APP_DATA_DIR || appRoot;
-const dest = path.join(dataRoot, 'data', 'config.json');
+const dest = path.join(appRoot, 'data', 'config.json');
 const secretKey = 'OPENROUTER_API_KEY';
 
 async function fetchSecret(name) {
