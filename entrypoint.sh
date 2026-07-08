@@ -8,6 +8,12 @@ if [ -n "$OPENHOST_APP_DATA_DIR" ]; then
   ln -sfn "$OPENHOST_APP_DATA_DIR/uploads" /home/vane/uploads
 fi
 
+# Seed Vane's config.json from the template, injecting the OpenRouter API key
+# fetched from the OpenHost secrets service. Must run after the data symlink so
+# the config lands in persistent storage. Never fails the boot.
+echo "Seeding Vane config from OpenHost secrets..."
+node /home/vane/openhost/seed-config.mjs || echo "Config seeding failed; continuing with existing config."
+
 echo "Starting SearXNG..."
 
 sudo -H -u searxng bash -c "cd /usr/local/searxng/searxng-src && export SEARXNG_SETTINGS_PATH='/etc/searxng/settings.yml' && export FLASK_APP=searx/webapp.py && /usr/local/searxng/searx-pyenv/bin/python -m flask run --host=0.0.0.0 --port=8080" &

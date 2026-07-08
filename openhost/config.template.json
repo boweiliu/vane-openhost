@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "setupComplete": true,
+  "preferences": {
+    "theme": "dark",
+    "measureUnit": "Metric",
+    "autoMediaSearch": true,
+    "showWeatherWidget": true,
+    "showNewsWidget": true
+  },
+  "personalization": {},
+  "modelProviders": [
+    {
+      "id": "6069bcd0-8a0d-405a-8b31-0868e2222b40",
+      "name": "Transformers",
+      "type": "transformers",
+      "chatModels": [],
+      "embeddingModels": [],
+      "config": {},
+      "hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "id": "9d31a0b7-a751-408e-9413-9a6f6c949ea8",
+      "name": "OpenRouter",
+      "type": "openai",
+      "chatModels": [
+        { "name": "Claude Sonnet 5", "key": "anthropic/claude-sonnet-5" },
+        { "name": "Claude Opus 4", "key": "anthropic/claude-opus-4" },
+        { "name": "GPT-4.1", "key": "openai/gpt-4.1" },
+        { "name": "Gemini 2.5 Pro", "key": "google/gemini-2.5-pro" },
+        { "name": "DeepSeek V4 Pro", "key": "deepseek/deepseek-v4-pro" }
+      ],
+      "embeddingModels": [],
+      "config": {
+        "apiKey": "",
+        "baseURL": "https://openrouter.ai/api/v1"
+      },
+      "hash": "f795bb16f83123b00a943cdbb2423c279f3675f219908a86e4eed199f1afe17f"
+    }
+  ],
+  "search": {
+    "searxngURL": "https://searxng.oh.bowei.in/"
+  }
+}

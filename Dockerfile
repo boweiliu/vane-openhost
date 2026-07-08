@@ -64,6 +64,7 @@ RUN cd "/usr/local/searxng/searxng-src" && \
 USER root
 
 WORKDIR /home/vane
+COPY openhost ./openhost
 COPY entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
 RUN sed -i 's/\r$//' ./entrypoint.sh || true

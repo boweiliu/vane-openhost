@@ -17,3 +17,11 @@ cpu_cores = 2.0
 
 [data]
 app_data = true
+
+# Vane pulls its OpenRouter API key from the OpenHost secrets service at startup
+# (see openhost/seed-config.mjs). The key is never stored in this repo.
+[[services.v2.consumes]]
+service = "github.com/imbue-openhost/openhost/services/secrets"
+shortname = "secrets"
+version = ">=0.1.0"
+grants = [{ key = "OPENROUTER_API_KEY" }]
