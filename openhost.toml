@@ -1,0 +1,26 @@
+[app]
+name = "vane"
+version = "0.1.0"
+description = "OpenHost wrapper for Vane, a privacy-focused AI answering engine."
+
+[runtime.container]
+image = "Dockerfile"
+port = 8080
+
+[routing]
+health_check = "/health"
+
+[resources]
+memory_mb = 3072
+cpu_cores = 2.0
+
+[data]
+app_data = true
+
+[[services.v2.consumes]]
+service = "github.com/imbue-openhost/openhost/services/secrets"
+shortname = "secrets"
+version = ">=0.1.0"
+grants = [
+    {key = "OPENROUTER_API_KEY"},
+]

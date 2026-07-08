@@ -1,0 +1,38 @@
+diff --git a/src/lib/models/providers/openai/openaiLLM.ts b/src/lib/models/providers/openai/openaiLLM.ts
+--- a/src/lib/models/providers/openai/openaiLLM.ts
++++ b/src/lib/models/providers/openai/openaiLLM.ts
+@@ -161,6 +161,18 @@ class OpenAILLM extends BaseLLM<OpenAIConfig> {
+     let recievedToolCalls: { name: string; id: string; arguments: string }[] =
+       [];
+ 
++    const parseToolArguments = (argumentsText: string) => {
++      if (!argumentsText.trim()) {
++        return {};
++      }
++
++      try {
++        return parse(argumentsText);
++      } catch (_err) {
++        return {};
++      }
++    };
++
+     for await (const chunk of stream) {
+       if (chunk.choices && chunk.choices.length > 0) {
+         const toolCalls = chunk.choices[0].delta.tool_calls;
+@@ -175,13 +187,13 @@ class OpenAILLM extends BaseLLM<OpenAIConfig> {
+                   arguments: tc.function?.arguments || '',
+                 };
+                 recievedToolCalls.push(call);
+-                return { ...call, arguments: parse(call.arguments || '{}') };
++                return { ...call, arguments: parseToolArguments(call.arguments) };
+               } else {
+                 const existingCall = recievedToolCalls[tc.index];
+                 existingCall.arguments += tc.function?.arguments || '';
+                 return {
+                   ...existingCall,
+-                  arguments: parse(existingCall.arguments),
++                  arguments: parseToolArguments(existingCall.arguments),
+                 };
+               }
+             }) || [],

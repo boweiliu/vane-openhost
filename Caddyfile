@@ -1,0 +1,11 @@
+:{$APP_PORT:8080} {
+	encode gzip
+
+	handle /health {
+		respond "ok" 200
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:{$VANE_PORT:3000}
+	}
+}
