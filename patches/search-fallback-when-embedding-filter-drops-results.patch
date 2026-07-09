@@ -1,0 +1,27 @@
+diff --git a/src/lib/agents/search/researcher/actions/search/baseSearch.ts b/src/lib/agents/search/researcher/actions/search/baseSearch.ts
+index de99123..7b1a5e1 100644
+--- a/src/lib/agents/search/researcher/actions/search/baseSearch.ts
++++ b/src/lib/agents/search/researcher/actions/search/baseSearch.ts
+@@ -85,6 +85,22 @@ export const executeSearch = async (input: {
+           };
+         });
+       } finally {
++        if (resultChunks.length === 0 && res.results.length > 0) {
++          resultChunks = res.results.slice(0, 5).map((r) => {
++            const content = r.content || r.title;
++
++            return {
++              content,
++              metadata: {
++                title: r.title,
++                url: r.url,
++                similarity: 1,
++                embedding: [],
++              },
++            };
++          });
++        }
++
+         results.push(...resultChunks);
+       }
+ 
