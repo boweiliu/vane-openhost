@@ -1,6 +1,16 @@
 --- a/src/lib/searxng.ts	2026-07-09 17:44:15.885397753 +0000
-+++ b/src/lib/searxng.ts	2026-07-09 17:44:15.901397823 +0000
-@@ -44,6 +44,9 @@
++++ b/src/lib/searxng.ts	2026-07-09 18:00:37.961983632 +0000
+@@ -38,12 +38,19 @@
+     });
+   }
+ 
++  if (!opts || !opts.engines) {
++    url.searchParams.append('engines', 'bing,google');
++  }
++
+   const controller = new AbortController();
+   const timeoutId = setTimeout(() => controller.abort(), 10000);
+ 
    try {
      const res = await fetch(url, {
        signal: controller.signal,
